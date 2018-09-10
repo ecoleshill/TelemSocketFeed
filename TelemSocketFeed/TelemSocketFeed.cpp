@@ -72,11 +72,11 @@ void Run_TelemFileMode(std::ifstream *ifs, MySocket &sock)
 			if (TelemNames[x] == "PLANE ALTITUDE") {T.Alt = atof(tmp.c_str());}
 			else if (TelemNames[x] == "ATTITUDE INDICATOR PITCH DEGREES") { T.Pitch = atof(tmp.c_str()) * 57.2958; }
 			else if (TelemNames[x] == "ATTITUDE INDICATOR BANK DEGREES") { T.Bank = T.TC_Rate = atof(tmp.c_str()) * 57.2958; }
-			else if (TelemNames[x] == "VERTICAL SPEED") { T.VS = atof(tmp.c_str()); }
+			else if (TelemNames[x] == "VERTICAL SPEED") { T.VS = (atof(tmp.c_str()) * 100); }
 			else if (TelemNames[x] == "TC RATE") { T.Bank = atof(tmp.c_str()) * 57.2958; }	//Temporarily using the Bank angle to control this
-			else if (TelemNames[x] == "TURN COORDINATOR BALL") { T.TC_Yaw = atof(tmp.c_str()); }	//-127 to 127 
+			else if (TelemNames[x] == "TURN COORDINATOR BALL") { T.TC_Yaw = atof(tmp.c_str()); 	}	//-127 to 127 
 			else if (TelemNames[x] == "AIRSPEED INDICATED") { T.IAS = atof(tmp.c_str()); }
-			else if (TelemNames[x] == "HEADING INDICATOR") { T.Heading = atof(tmp.c_str()); }
+			else if (TelemNames[x] == "HEADING INDICATOR") { T.Heading = (atof(tmp.c_str()) * 57.2958); }
 		}
 
 		//Transmit the data to the GUI displays
@@ -127,13 +127,11 @@ int main(int argc, char *argv[])
 	//Startup the updated Avionics Instrument Control Demo program and let the replayed telemetry drive
 	//the 6-pack
 	
-	
 	STARTUPINFO startInfo = { 0 };
 	PROCESS_INFORMATION processInfo = { 0 };
 
 	BOOL bSuccess = CreateProcess(TEXT("C:\\Users\\elliott.coleshill\\Documents\\AA_RESEARCH\\AvionicsInstrumentControlDemo\\bin\\Debug\\AvionicsInstrumentControlDemo.exe"), NULL, NULL, NULL, FALSE, NULL, NULL,
 		NULL, &startInfo, &processInfo);
-		
 	
 	
 
