@@ -116,12 +116,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MySocket.cpp" />
-    <ClCompile Include="SimConnect.cpp" />
     <ClCompile Include="TelemSocketFeed.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MySocket.h" />
-    <ClInclude Include="SimConnect.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Telem_CZBA-Circuit_2018_5_6 19_21_20.txt" />

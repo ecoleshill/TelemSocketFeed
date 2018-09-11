@@ -10,9 +10,9 @@ History:
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <thread>
 #include <vector>
 #include <Windows.h>
-#include "SimConnect.h"
 #include "MySocket.h"
 
 enum MODE {TELEMFILE, SIMCONNECT};
@@ -97,7 +97,7 @@ void Run_TelemFileMode(std::ifstream *ifs, MySocket &sock)
 //simulator, packetize it and transmit it over to the provided socket
 void Run_SimConnectMode(MySocket &sock)
 {
-	_SimConnect::CSimConnect myConnection("SimConnect.cfg");
+	std::cout << "SIMCONNECT Mode is not implemented at this time" << std::endl;
 }
 
 int main(int argc, char *argv[])
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	else
-		std::cout << argc << " arguments entered - Running in SimConnect Mode with SimConnect.cfg" << std::endl;
+		std::cout << argc << " arguments entered - Running in SimConnect Mode" << std::endl;
 
 	//Startup the updated Avionics Instrument Control Demo program and let the replayed telemetry drive
 	//the 6-pack
@@ -133,6 +133,8 @@ int main(int argc, char *argv[])
 	BOOL bSuccess = CreateProcess(TEXT("C:\\Users\\elliott.coleshill\\Documents\\AA_RESEARCH\\AvionicsInstrumentControlDemo\\bin\\Debug\\AvionicsInstrumentControlDemo.exe"), NULL, NULL, NULL, FALSE, NULL, NULL,
 		NULL, &startInfo, &processInfo);
 	
+	
+
 	//Create the TCP/IP socket and start the connection with the remote server
 	MySocket sock(CLIENT, "127.0.0.1", 11000, TCP, 36);
 	std::cout << "Waiting for connection" << std::endl;
